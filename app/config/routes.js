@@ -24,13 +24,13 @@ import {ReactDOM, render} from 'react-dom';
 import Main from "../components/Main";
 import Search from "../components/Search";
 import Saved from "../components/Saved";
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, Link, IndexLink, hashHistory } from 'react-router';
 
 
-module.exports=(
+export default (
 
   // The high level component is the Router component
-  <Router>
+  <Router History={hashHistory}>
     <Route path="/" component={Main}>
 
       {/* If user selects Info or Chat show the appropriate component */}

@@ -3,9 +3,32 @@ import React, { Component } from "react";
 // import Link from "react-router.Link";
 import {Link} from "react-router";
 
+import helpers from "./helpers";
 
 class Main extends Component {
-	
+	constructor(){
+		super();
+		this.state = {
+			query: "",
+			num: 5
+		};
+		this.callNYT = this.callNYT.bind(this);
+	}
+
+	callNYT(){
+		// console.log("inside callNYT");
+		// let searchTerm = document.getElementById("search-term").value
+		this.setState({
+
+			query: searchTerm
+		});
+		// console.log("callNYT query", this.state.query);
+		helpers.runQuery(this.state.num, this.state.query).then(function(response) {
+      		console.log("runquery response", response);
+      		// console.log("inside helpers", query);
+    	});
+	}
+
 	render() {
 		return (
 		<div className="container">
@@ -25,7 +48,7 @@ class Main extends Component {
 		            		<form role="form">             
 		              			<div className="form-group">
 		                			<label for="search">Search Term:</label>
-		                			<input type="text" className="form-control" id="search-term"/>
+		                			<input type="text" className="form-control" id="search-term" value="earthquake"/>
 		              			</div>
 
 		              			<div className="form-group">
@@ -50,7 +73,7 @@ class Main extends Component {
 				                <input type="text" className="form-control" id="end-year"/>
 				              	</div>
 
-					             <Link to="/Search"><button className="btn btn-default"><i className="fa fa-search"></i> Search</button></Link>
+					             <Link to="/Search" className="btn btn-default" onClick={this.callNYT}><i className="fa fa-search"></i> Search1233</Link>
 					             <Link to="/Saved"><button className="btn btn-default">Saved Articles</button></Link>
 
 					             <button type="button" className="btn btn-default" id="clear-all"><i className="fa fa-trash"></i> Clear Results</button>

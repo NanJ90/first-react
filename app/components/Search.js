@@ -7,6 +7,8 @@ import React from "react";
 import {Link} from "react-router";
 
 class Search extends React.Component{
+ // functionational components
+
   render() {
     return (
       <div className="container">
