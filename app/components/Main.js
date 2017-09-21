@@ -45,6 +45,22 @@ callNYT() {
       }.bind(this));
     
   }
+
+ goToDb(){
+    helpers.saveArticle(
+      // ArticleId: {this.props.results._id},
+      // title: {this.props.results.headline.main},
+      // date: Date.now(),
+      // url:{this.props.results.web_url
+        this.props.results).then(function(err,res)
+        {
+          if(err){
+            return err
+          }
+          console.log(res);
+     });
+
+  }
  
 	render() {
 		return (

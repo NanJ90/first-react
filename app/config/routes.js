@@ -39,7 +39,7 @@ const routes = (
       <Route path="Saved" component={Saved} />
 
       {/* If user selects any other path... we get the Info Route */}
-      <IndexRoute component={Search} />
+      <IndexRoute component={Saved} />
 
     </Route>
   </Router>

@@ -61,7 +61,7 @@ class Search extends React.Component{
                     <div className = "row">
                       <div className="col-lg-12">
                         <h2><a href={results.web_url} style={styles.fontStyle} key={results._id}>#{i+1} {results.headline.main}</a></h2>
-                        <button onClick = {this.state.goToDb} id="saved">Save</button>
+                        {/*<button onClick = {this.goToDb} id="saved">Save</button>*/}
                       </div>
                     </div>
                   </div>
