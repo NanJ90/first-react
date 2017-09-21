@@ -20,17 +20,18 @@
 // var IndexRoute = Router.IndexRoute;
 
 import React from 'react';
-import {ReactDOM, render} from 'react-dom';
+import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
+
 import Main from "../components/Main";
 import Search from "../components/Search";
 import Saved from "../components/Saved";
-import { Router, Route, IndexRoute, Link, IndexLink, hashHistory } from 'react-router';
 
 
-export default (
+
+const routes = (
 
   // The high level component is the Router component
-  <Router History={hashHistory}>
+  <Router History={browserHistory}>
     <Route path="/" component={Main}>
 
       {/* If user selects Info or Chat show the appropriate component */}
@@ -38,9 +39,11 @@ export default (
       <Route path="Saved" component={Saved} />
 
       {/* If user selects any other path... we get the Info Route */}
-      <IndexRoute component={Saved} />
+      <IndexRoute component={Search} />
 
     </Route>
   </Router>
 
 );
+
+export default routes;

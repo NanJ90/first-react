@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema({
   ArticleId:{
-  	type:String
+  	type:Number
   },
   title: {
     type: String

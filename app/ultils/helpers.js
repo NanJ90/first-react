@@ -7,24 +7,25 @@ var authKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
 var helpers = {
 
   // This function serves our purpose of running the query to geolocate.
-  runQuery: function(numArticles, query) {
-    var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
-      authKey + "&q=" + query;
-    console.log("runquery helper", query);
+  runQuery: function(query) {
 
-    // Figure out the geolocation
+    var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
+      authKey + "&q=" + query;
+
+    // console.log("runquery helpers", query);
    
-    return axios.get(queryURLBase);
+    return axios.get(queryURL);
   },
 
   // This function hits our own server to retrieve the record of query results
-  getHistory: function() {
-    return axios.get("/api");
+  getSaved: function() {
+    return axios.get("/api/saved");
   },
 
   // This function posts new searches to our database.
-  postHistory: function(location) {
-    return axios.post("/api", { location: location });
+  saveArticle: function(saved) {
+    console.log(saved);
+    return axios.post("/api/saved");
   }
 };
 

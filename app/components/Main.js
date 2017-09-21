@@ -3,32 +3,49 @@ import React, { Component } from "react";
 // import Link from "react-router.Link";
 import {Link} from "react-router";
 
-import helpers from "./helpers";
+import Search from "./Search";
+import Saved from "./Saved";
+import helpers from "../ultils/helpers";
 
 class Main extends Component {
-	constructor(){
+	constructor() {
 		super();
 		this.state = {
 			query: "",
-			num: 5
+			results:[]
 		};
+		this.handleChange = this.handleChange.bind(this);
 		this.callNYT = this.callNYT.bind(this);
 	}
+	handleChange(event) {
+    	this.setState({ query: event.target.value });
+  	}
 
-	callNYT(){
-		// console.log("inside callNYT");
-		// let searchTerm = document.getElementById("search-term").value
-		this.setState({
+  // handleButtonClick() {
+  //   const newQuote = this.state.inputValue;
+  //   API.saveQuote(newQuote).then(this.props.getQuotes);
+  //   this.setState({ inputValue: "" });
+//   }
 
-			query: searchTerm
-		});
-		// console.log("callNYT query", this.state.query);
-		helpers.runQuery(this.state.num, this.state.query).then(function(response) {
-      		console.log("runquery response", response);
-      		// console.log("inside helpers", query);
-    	});
-	}
+callNYT() {
+    // console.log("inside callNYT");
+    // let searchTerm = document.getElementById("search-term").value
+    // this.setState({
 
+    //  // query: searchTerm
+    // });
+    // console.log("callNYT query", this.state.query);
+    helpers.runQuery(this.state.query).then(function(response) {
+          // console.log("runquery response", response);
+          // console.log("inside helpers", query);
+          // getting data of object from NYT 
+
+          this.setState({results:response.data.response.docs});
+           // console.log(this.state);
+      }.bind(this));
+    
+  }
+ 
 	render() {
 		return (
 		<div className="container">
@@ -47,12 +64,12 @@ class Main extends Component {
 		          		<div className="panel-body">           
 		            		<form role="form">             
 		              			<div className="form-group">
-		                			<label for="search">Search Term:</label>
-		                			<input type="text" className="form-control" id="search-term" value="earthquake"/>
+		                			<label For="search">Search Term:</label>
+		                			<input type="text" className="form-control" id="query" value={this.state.query} onChange={this.handleChange} required/>
 		              			</div>
 
 		              			<div className="form-group">
-		                		<label for="pwd">Number of Records to Retrieve:</label>
+		                		<label For="pwd">Number of Records to Retrieve:</label>
 		                		<select className="form-control" id="num-records-select">
 									<option value="1">1</option>
 									
@@ -63,17 +80,17 @@ class Main extends Component {
 
 		              
 				              	<div className="form-group">
-				                <label for="start-year">Start Year (Optional):</label>
+				                <label For="start-year">Start Year (Optional):</label>
 				                <input type="text" className="form-control" id="start-year"/>
 				              	</div>
 
 		             
 				              	<div className="form-group">
-				                <label for="end-year">End Year (Optional):</label>
+				                <label For="end-year">End Year (Optional):</label>
 				                <input type="text" className="form-control" id="end-year"/>
 				              	</div>
+					             <Link to="/Search" className="btn btn-default" onClick={this.callNYT}><i className="fa fa-search"></i> Search</Link>
 
-					             <Link to="/Search" className="btn btn-default" onClick={this.callNYT}><i className="fa fa-search"></i> Search1233</Link>
 					             <Link to="/Saved"><button className="btn btn-default">Saved Articles</button></Link>
 
 					             <button type="button" className="btn btn-default" id="clear-all"><i className="fa fa-trash"></i> Clear Results</button>
@@ -83,8 +100,13 @@ class Main extends Component {
         			</div>
       			</div>
     		</div>
-    		<div className="row">
-    			{this.props.children}
+    		<div className="container">
+    		
+ 			{
+ 				this.props.children && React.cloneElement(this.props.children, {
+              	results: this.state.results
+            	})
+            }
     		</div>
     	</div>
     	
