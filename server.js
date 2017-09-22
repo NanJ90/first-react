@@ -24,8 +24,16 @@ app.use(express.static("public"));
 
 // -------------------------------------------------
 
+
+
+var databaseUri = "mongodb://localhost/nytreact";
 // MongoDB Configuration configuration (Change this URL to your own DB)
-mongoose.connect("https://tranquil-forest-45064.herokuapp.com/");
+if (process.env.MONGODB_URI) {
+    mongoose.connect("process.env.mongodb://<dbuser>:<dbpassword>@ds147044.mlab.com:47044/heroku_8tqs9ws2");
+} else {
+  mongoose.connect(databaseUri);
+}
+
 var db = mongoose.connection;
 
 db.on("error", function(err) {
@@ -46,10 +54,12 @@ app.get("/", function(req, res) {
 // This is the route we will send GET requests to retrieve our most recent search data.
 // We will call this route the moment our page gets rendered
 app.get("/api/saved", function(req, res) {
+  console.log("hello");
   // We will find all the records, sort it in descending order, then limit the records to 5
   Article.find({}).sort([
     ["date", "descending"]
   ]).limit(10).exec(function(err, doc) {
+    console.log("doggy");
     if (err) {
       console.log(err);
     }
