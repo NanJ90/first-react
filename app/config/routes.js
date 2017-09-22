@@ -36,10 +36,11 @@ const routes = (
 
       {/* If user selects Info or Chat show the appropriate component */}
       <Route path="Search" component={Search} />
+        {/*<Route path="Results" compponrnt={Results}/>*/}
       <Route path="Saved" component={Saved} />
 
       {/* If user selects any other path... we get the Info Route */}
-      <IndexRoute component={Saved} />
+      <IndexRoute component={Search} />
 
     </Route>
   </Router>

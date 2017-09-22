@@ -20,14 +20,27 @@ var helpers = {
   // This function hits our own server to retrieve the record of query results
   getSaved: function() {
     return axios.get("/api/saved");
+
   },
 
   // This function posts new searches to our database.
-  saveArticle: function(saved) {
-    console.log(saved);
-    return axios.post("/api/saved");
+  saveArticle: function(id,title,date,url) {
+  console.log(id,title,date,url);
+    var newArticle = {
+      articleId: id,
+      title: title,
+      date:date,
+      url:url
+    };
+    // console.log(article);
+    return axios.post("/api/saved", JSON.stringify(newArticle))
+      .then(function(results) {
+        console.log("axios post");
+          // return results._id;
+      // })
+    });
   }
-};
+}
 
 // We export the API helper
 export default helpers;

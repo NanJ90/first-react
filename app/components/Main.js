@@ -12,20 +12,25 @@ class Main extends Component {
 		super();
 		this.state = {
 			query: "",
-			results:[]
+			results:[],
+			saved:[]
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.callNYT = this.callNYT.bind(this);
+		this.showSaved = this.showSaved.bind(this);
 	}
 	handleChange(event) {
     	this.setState({ query: event.target.value });
   	}
 
-  // handleButtonClick() {
-  //   const newQuote = this.state.inputValue;
-  //   API.saveQuote(newQuote).then(this.props.getQuotes);
-  //   this.setState({ inputValue: "" });
-//   }
+  	showSaved() {
+  		// console.log("hello");
+  		// let holder = this;
+    helpers.getSaved().then(function(res){
+    	console.log(res);
+    	this.setState({ saved: res.data});
+    }.bind(this));
+  }
 
 callNYT() {
     // console.log("inside callNYT");
@@ -46,21 +51,21 @@ callNYT() {
     
   }
 
- goToDb(){
-    helpers.saveArticle(
-      // ArticleId: {this.props.results._id},
-      // title: {this.props.results.headline.main},
-      // date: Date.now(),
-      // url:{this.props.results.web_url
-        this.props.results).then(function(err,res)
-        {
-          if(err){
-            return err
-          }
-          console.log(res);
-     });
+ // goToDb(){
+ //    helpers.saveArticle(
+ //      // ArticleId: {this.props.results._id},
+ //      // title: {this.props.results.headline.main},
+ //      // date: Date.now(),
+ //      // url:{this.props.results.web_url
+ //        this.props.results).then(function(err,res)
+ //        {
+ //          if(err){
+ //            return err
+ //          }
+ //          console.log(res);
+ //     });
 
-  }
+ //  }
  
 	render() {
 		return (
@@ -107,7 +112,7 @@ callNYT() {
 				              	</div>
 					             <Link to="/Search" className="btn btn-default" onClick={this.callNYT}><i className="fa fa-search"></i> Search</Link>
 
-					             <Link to="/Saved"><button className="btn btn-default">Saved Articles</button></Link>
+					             <Link to="/Saved"><button className="btn btn-default" onClick={this.showSaved}>Saved Articles</button></Link>
 
 					             <button type="button" className="btn btn-default" id="clear-all"><i className="fa fa-trash"></i> Clear Results</button>
 
@@ -119,10 +124,26 @@ callNYT() {
     		<div className="container">
     		
  			{
- 				this.props.children && React.cloneElement(this.props.children, {
-              	results: this.state.results
+ 				
+ 				// var childrenWithMoreProps = React.Children.map(this.props.children, (child) => {
+     //  if(child.type === Saved) {
+     //    return React.cloneElement(child, {
+     //      saved: this.state.saved
+     //    });
+     //  } else {
+     //    return React.cloneElement(child, {
+     //    	results: this.state.results
+     //    });
+     //  }
+    // });
+		this.props.children && React.cloneElement(this.props.children, {
+              	results: this.state.results,
+              	saved: this.state.saved
             	})
+
             }
+
+
     		</div>
     	</div>
     	
