@@ -62,13 +62,14 @@ app.get("/api/saved", function(req, res) {
 
 // This is the route we will send POST requests to save each search.
 app.post("/api/saved", function(req, res) {
-  console.log("BODY: " + req.body);
+  console.log("BODY: " ,req.body);
+  // 　console.log("body", res.body);
   // Here we'll save the location based on the JSON input.
   // We'll use Date.now() to always get the current date time
   Article.create({
-    ArticleId:req.body.id,
+    articleId:req.body.articleId,
     title: req.body.title,
-    date: Date.now(),
+    date: req.body.date,
     url: req.body.url
   }, function(err) {
     if (err) {
@@ -80,6 +81,18 @@ app.post("/api/saved", function(req, res) {
   });
 });
 
+app.delete("/api/saved/:id", function(req, res) {
+  // console.log("delete with id: ", req.params);
+  Article.remove({"_id": req.params.id})
+  .exec(function(err, data) {
+    if(err){
+      console.log(err);
+      }else{
+        res.send("Deleted");
+        console.log("deleted", data);
+    }
+  });
+});
 // -------------------------------------------------
 
 // Listener

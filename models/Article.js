@@ -2,8 +2,9 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema({
-  ArticleId:{
-  	type:Number
+  articleId:{
+  	type:String,
+    unique:true
   },
   title: {
     type: String

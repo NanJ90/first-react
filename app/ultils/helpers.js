@@ -39,6 +39,14 @@ var helpers = {
           // return results._id;
       // })
     });
+  },
+
+  deleteArticle: function(res){
+    console.log(res);
+    var id = res._id;
+    return axios.delete(`/api/saved/${id}`).then(function(data) {
+      console.log("sending deleting id");
+    });
   }
 }
 

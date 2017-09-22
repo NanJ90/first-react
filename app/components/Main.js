@@ -27,7 +27,7 @@ class Main extends Component {
   		// console.log("hello");
   		// let holder = this;
     helpers.getSaved().then(function(res){
-    	console.log(res);
+    	// console.log(res);
     	this.setState({ saved: res.data});
     }.bind(this));
   }
@@ -41,7 +41,7 @@ callNYT() {
     // });
     // console.log("callNYT query", this.state.query);
     helpers.runQuery(this.state.query).then(function(response) {
-          // console.log("runquery response", response);
+          console.log("runquery response", response);
           // console.log("inside helpers", query);
           // getting data of object from NYT 
 

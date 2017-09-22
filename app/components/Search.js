@@ -33,7 +33,6 @@ class Search extends React.Component{
         });
 
   }
-  
   render() {
     // console.log(this.props);
     // console.log({this.goToDb(saved)});
@@ -57,7 +56,8 @@ class Search extends React.Component{
                     <div className = "row">
                       <div className="col-lg-12">
                         <h2><a href={result.web_url} style={styles.fontStyle} key={result._id}>#{i+1} {result.headline.main}</a></h2>
-                        <button onClick ={() => this.goToDb(result)} id="saved">Save</button>
+                        <button onClick ={() => this.goToDb(result)} className="btn btn-default" id="saved">Save</button>
+                        
                       </div>
                     </div>
                   </div>
@@ -66,7 +66,7 @@ class Search extends React.Component{
                 }.bind(this))
               
               }
-              {/*<Results />*/}
+              
             </div>
 
           </div>
