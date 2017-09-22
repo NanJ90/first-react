@@ -21,7 +21,7 @@ class Search extends React.Component{
 
   goToDb(res){
  
-    var newArticle = JSON.stringify(res);
+    // var newArticle = JSON.stringify(res);
        console.log(res);
     helpers.saveArticle(
       // ArticleId: {this.props.results._id},

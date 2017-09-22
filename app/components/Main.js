@@ -114,7 +114,7 @@ callNYT() {
 
 					             <Link to="/Saved"><button className="btn btn-default" onClick={this.showSaved}>Saved Articles</button></Link>
 
-					             <button type="button" className="btn btn-default" id="clear-all"><i className="fa fa-trash"></i> Clear Results</button>
+					             {/*<button type="button" className="btn btn-default" id="clear-all"><i className="fa fa-trash"></i> Clear Results</button>*/}
 
 		            		</form>
 		          		</div>

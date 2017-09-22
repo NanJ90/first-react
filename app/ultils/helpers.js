@@ -33,7 +33,7 @@ var helpers = {
       url:url
     };
     // console.log(article);
-    return axios.post("/api/saved", JSON.stringify(newArticle))
+    return axios.post("/api/saved", newArticle)
       .then(function(results) {
         console.log("axios post");
           // return results._id;
