@@ -29,7 +29,7 @@ app.use(express.static("public"));
 var databaseUri = "mongodb://localhost/nytreact";
 // MongoDB Configuration configuration (Change this URL to your own DB)
 if (process.env.MONGODB_URI) {
-    mongoose.connect("process.env.mongodb://<dbuser>:<dbpassword>@ds147044.mlab.com:47044/heroku_8tqs9ws2");
+    mongoose.connect(process.env.MONGODB_URI);
 } else {
   mongoose.connect(databaseUri);
 }
